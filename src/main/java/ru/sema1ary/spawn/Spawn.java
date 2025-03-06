@@ -57,7 +57,7 @@ public final class Spawn extends JavaPlugin {
 
     @SneakyThrows
     private void initConnectionSource() {
-        Path databaseFilePath = Paths.get("plugins/chat-room/database.sqlite");
+        Path databaseFilePath = Paths.get("plugins/spawn/database.sqlite");
         if(!Files.exists(databaseFilePath) && !databaseFilePath.toFile().createNewFile()) {
             return;
         }
