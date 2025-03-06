@@ -4,8 +4,10 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
 import lombok.SneakyThrows;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.plugin.java.JavaPlugin;
 import ormlite.ConnectionSourceUtil;
+import ru.sema1ary.spawn.command.SpawnCommand;
 import ru.sema1ary.spawn.listener.DamageListener;
 import ru.sema1ary.spawn.listener.JoinListener;
 import ru.sema1ary.spawn.model.SpawnModel;
@@ -44,9 +46,9 @@ public final class Spawn extends JavaPlugin {
 
         new LiteCommandUtil().create(
                 ServiceManager.getService(ConfigService.class).get("litecommands-prefix"),
-                ServiceManager.getService(ConfigService.class).get("litecommands-invalid-usage"),
-                ServiceManager.getService(ConfigService.class).get("litecommands-player-only"),
-                ServiceManager.getService(ConfigService.class).get("litecommands-player-not-found")
+
+                new SpawnCommand(MiniMessage.miniMessage(), ServiceManager.getService(SpawnService.class),
+                        ServiceManager.getService(ConfigService.class))
         );
     }
 

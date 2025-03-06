@@ -1,8 +1,5 @@
 configuration:
   litecommands-prefix: 'spawn'
-  litecommands-invalid-usage: '<red>Неправильное использование!'
-  litecommands-player-only: '<red>Эта команда доступна только игрокам!'
-  litecommands-player-not-found: '<red>Игрок не найден!'
 
   reload-message: '<green>Плагин успешно перезапущен.'
   spawn-set-message: '<green>Spawn успешно установлен.'

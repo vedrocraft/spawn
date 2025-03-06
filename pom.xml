@@ -17,6 +17,7 @@
     </properties>
 
     <build>
+        <finalName>spawn</finalName>
         <defaultGoal>clean package</defaultGoal>
         <plugins>
             <plugin>
@@ -81,7 +82,7 @@
         <dependency>
             <groupId>dev.rollczi</groupId>
             <artifactId>litecommands-bukkit</artifactId>
-            <version>3.9.7</version>
+            <version>3.4.3</version>
         </dependency>
         <dependency>
             <groupId>ru.vidoskim</groupId>
