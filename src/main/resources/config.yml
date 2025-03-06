@@ -1,0 +1,17 @@
+configuration:
+  litecommands-prefix: 'spawn'
+  litecommands-invalid-usage: '<red>Неправильное использование!'
+  litecommands-player-only: '<red>Эта команда доступна только игрокам!'
+  litecommands-player-not-found: '<red>Игрок не найден!'
+
+  reload-message: '<green>Плагин успешно перезапущен.'
+  spawn-set-message: '<green>Spawn успешно установлен.'
+
+  spawn-command-message: '<green>Вы были телепортированы на spawn.'
+  spawn-command-other-sender: '<green>Вы успешно телепортировали игрока на spawn.'
+  spawn-command-other-target: '<gray>Вас телепортировали на spawn.'
+
+  teleport-on-join: true
+  teleport-on-first-join: true
+
+  teleport-when-player-fall-in-void: true
