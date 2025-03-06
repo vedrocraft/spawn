@@ -71,5 +71,4 @@ public final class Spawn extends JavaPlugin {
     private <D extends Dao<T, ?>, T> D getDao(Class<T> daoClass) {
         return DaoManager.lookupDao(connectionSource, daoClass);
     }
-
 }
