@@ -9,6 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import ormlite.ConnectionSourceUtil;
 import ru.sema1ary.spawn.command.SpawnCommand;
 import ru.sema1ary.spawn.listener.DamageListener;
+import ru.sema1ary.spawn.listener.DeathListener;
 import ru.sema1ary.spawn.listener.JoinListener;
 import ru.sema1ary.spawn.model.SpawnModel;
 import ru.sema1ary.spawn.service.SpawnService;
@@ -41,6 +42,10 @@ public final class Spawn extends JavaPlugin {
         ), this);
 
         getServer().getPluginManager().registerEvents(new DamageListener(ServiceManager.getService(SpawnService.class),
+                ServiceManager.getService(ConfigService.class)
+        ), this);
+
+        getServer().getPluginManager().registerEvents(new DeathListener(ServiceManager.getService(SpawnService.class),
                 ServiceManager.getService(ConfigService.class)
         ), this);
 

@@ -14,7 +14,7 @@ public class JoinListener implements Listener {
     private final ConfigService configService;
 
     @EventHandler
-    private void onJoin(PlayerJoinEvent event) {
+    public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
         if((boolean) configService.get("teleport-on-first-join")

@@ -14,7 +14,7 @@ public class DamageListener implements Listener {
     private final ConfigService configService;
 
     @EventHandler
-    private void onDamage(EntityDamageEvent event) {
+    public void onDamage(EntityDamageEvent event) {
         if(!(boolean) configService.get("teleport-when-player-fall-in-void")) {
             return;
         }

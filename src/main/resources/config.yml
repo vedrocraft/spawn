@@ -12,3 +12,4 @@ configuration:
   teleport-on-first-join: true
 
   teleport-when-player-fall-in-void: true
+  teleport-when-player-death: true
