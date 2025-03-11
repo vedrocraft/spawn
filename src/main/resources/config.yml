@@ -1,6 +1,4 @@
 configuration:
-  litecommands-prefix: 'spawn'
-
   reload-message: '<green>Плагин успешно перезапущен.'
   spawn-set-message: '<green>Spawn успешно установлен.'
 
