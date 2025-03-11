@@ -23,6 +23,10 @@ public class JoinListener implements Listener {
             return;
         }
 
+        if(configService.get("clear-inventory-on-join")) {
+            player.getInventory().clear();
+        }
+
         if(configService.get("teleport-on-join")) {
             spawnService.teleportToSpawn(player);
         }

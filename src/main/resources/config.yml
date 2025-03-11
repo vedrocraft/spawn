@@ -7,6 +7,7 @@ configuration:
   spawn-command-other-target: '<gray>Вас телепортировали на spawn.'
 
   teleport-on-join: true
+  clear-inventory-on-join: true
   teleport-on-first-join: true
 
   teleport-when-player-fall-in-void: true
