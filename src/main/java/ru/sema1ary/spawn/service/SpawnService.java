@@ -4,7 +4,7 @@ import lombok.NonNull;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import ru.sema1ary.spawn.model.SpawnModel;
-import service.Service;
+import ru.sema1ary.vedrocraftapi.service.Service;
 
 import java.util.Optional;
 

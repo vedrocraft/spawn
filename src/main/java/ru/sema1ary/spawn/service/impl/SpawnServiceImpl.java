@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 import ru.sema1ary.spawn.dao.SpawnDao;
 import ru.sema1ary.spawn.model.SpawnModel;
 import ru.sema1ary.spawn.service.SpawnService;
-import ru.vidoskim.bukkit.util.LocationUtil;
+import ru.sema1ary.vedrocraftapi.serialization.LocationSerializer;
 
 import java.sql.SQLException;
 import java.util.Optional;
@@ -40,11 +40,11 @@ public class SpawnServiceImpl implements SpawnService {
         Optional<SpawnModel> optionalHub = get();
         if(optionalHub.isEmpty()) {
             spawn = SpawnModel.builder()
-                    .location(LocationUtil.locationToString(location))
+                    .location(LocationSerializer.serialize(location))
                     .build();
         } else  {
             spawn = optionalHub.get();
-            spawn.setLocation(LocationUtil.locationToString(location));
+            spawn.setLocation(LocationSerializer.serialize(location));
         }
 
         save(spawn);
@@ -58,6 +58,6 @@ public class SpawnServiceImpl implements SpawnService {
             return;
         }
 
-        player.teleportAsync(LocationUtil.stringToLocation(optionalSpawn.get().getLocation()));
+        player.teleportAsync(LocationSerializer.deserialize(optionalSpawn.get().getLocation()));
     }
 }

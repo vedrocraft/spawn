@@ -6,7 +6,6 @@ import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
 import lombok.SneakyThrows;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.plugin.java.JavaPlugin;
-import ormlite.ConnectionSourceUtil;
 import ru.sema1ary.spawn.command.SpawnCommand;
 import ru.sema1ary.spawn.listener.DamageListener;
 import ru.sema1ary.spawn.listener.DeathListener;
@@ -14,10 +13,11 @@ import ru.sema1ary.spawn.listener.JoinListener;
 import ru.sema1ary.spawn.model.SpawnModel;
 import ru.sema1ary.spawn.service.SpawnService;
 import ru.sema1ary.spawn.service.impl.SpawnServiceImpl;
-import ru.vidoskim.bukkit.service.ConfigService;
-import ru.vidoskim.bukkit.service.impl.ConfigServiceImpl;
-import ru.vidoskim.bukkit.util.LiteCommandUtil;
-import service.ServiceManager;
+import ru.sema1ary.vedrocraftapi.command.LiteCommandBuilder;
+import ru.sema1ary.vedrocraftapi.ormlite.ConnectionSourceUtil;
+import ru.sema1ary.vedrocraftapi.service.ConfigService;
+import ru.sema1ary.vedrocraftapi.service.ServiceManager;
+import ru.sema1ary.vedrocraftapi.service.impl.ConfigServiceImpl;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -49,12 +49,10 @@ public final class Spawn extends JavaPlugin {
                 ServiceManager.getService(ConfigService.class)
         ), this);
 
-        new LiteCommandUtil().create(
-                ServiceManager.getService(ConfigService.class).get("litecommands-prefix"),
-
-                new SpawnCommand(MiniMessage.miniMessage(), ServiceManager.getService(SpawnService.class),
-                        ServiceManager.getService(ConfigService.class))
-        );
+        LiteCommandBuilder.builder()
+                .commands(new SpawnCommand(MiniMessage.miniMessage(), ServiceManager.getService(SpawnService.class),
+                        ServiceManager.getService(ConfigService.class)))
+                .build();
     }
 
     @Override
@@ -69,8 +67,7 @@ public final class Spawn extends JavaPlugin {
             return;
         }
 
-        connectionSource = ConnectionSourceUtil.connectNoSQLDatabase("sqlite",
-                databaseFilePath.toString(), SpawnModel.class);
+        connectionSource = ConnectionSourceUtil.connectNoSQLDatabase(databaseFilePath.toString(), SpawnModel.class);
 
     }
 

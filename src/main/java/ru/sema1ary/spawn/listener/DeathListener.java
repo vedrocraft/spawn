@@ -5,7 +5,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import ru.sema1ary.spawn.service.SpawnService;
-import ru.vidoskim.bukkit.service.ConfigService;
+import ru.sema1ary.vedrocraftapi.service.ConfigService;
 
 @RequiredArgsConstructor
 public class DeathListener implements Listener {

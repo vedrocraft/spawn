@@ -11,7 +11,7 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import ru.sema1ary.spawn.service.SpawnService;
-import ru.vidoskim.bukkit.service.ConfigService;
+import ru.sema1ary.vedrocraftapi.service.ConfigService;
 
 @RequiredArgsConstructor
 @Command(name = "spawn")
