@@ -2,7 +2,6 @@ package ru.sema1ary.spawn;
 
 import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
 import lombok.SneakyThrows;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.plugin.java.JavaPlugin;
 import ru.sema1ary.spawn.command.SpawnCommand;
 import ru.sema1ary.spawn.listener.DamageListener;
@@ -50,7 +49,7 @@ public final class Spawn extends JavaPlugin implements DaoFinder, ServiceGetter 
         ), this);
 
         LiteCommandBuilder.builder()
-                .commands(new SpawnCommand(MiniMessage.miniMessage(), ServiceManager.getService(SpawnService.class),
+                .commands(new SpawnCommand(ServiceManager.getService(SpawnService.class),
                         ServiceManager.getService(ConfigService.class)))
                 .build();
     }
