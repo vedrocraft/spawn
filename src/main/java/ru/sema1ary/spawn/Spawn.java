@@ -1,7 +1,5 @@
 package ru.sema1ary.spawn;
 
-import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
 import lombok.SneakyThrows;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -15,7 +13,9 @@ import ru.sema1ary.spawn.service.SpawnService;
 import ru.sema1ary.spawn.service.impl.SpawnServiceImpl;
 import ru.sema1ary.vedrocraftapi.command.LiteCommandBuilder;
 import ru.sema1ary.vedrocraftapi.ormlite.ConnectionSourceUtil;
+import ru.sema1ary.vedrocraftapi.ormlite.DaoFinder;
 import ru.sema1ary.vedrocraftapi.service.ConfigService;
+import ru.sema1ary.vedrocraftapi.service.ServiceGetter;
 import ru.sema1ary.vedrocraftapi.service.ServiceManager;
 import ru.sema1ary.vedrocraftapi.service.impl.ConfigServiceImpl;
 
@@ -23,7 +23,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public final class Spawn extends JavaPlugin {
+public final class Spawn extends JavaPlugin implements DaoFinder, ServiceGetter {
     private JdbcPooledConnectionSource connectionSource;
 
     @Override
@@ -35,7 +35,7 @@ public final class Spawn extends JavaPlugin {
         initConnectionSource();
 
         ServiceManager.registerService(SpawnService.class, new SpawnServiceImpl(
-                getDao(SpawnModel.class)));
+                getDao(connectionSource, SpawnModel.class)));
 
         getServer().getPluginManager().registerEvents(new JoinListener(ServiceManager.getService(SpawnService.class),
                 ServiceManager.getService(ConfigService.class)
@@ -69,10 +69,5 @@ public final class Spawn extends JavaPlugin {
 
         connectionSource = ConnectionSourceUtil.connectNoSQLDatabase(databaseFilePath.toString(), SpawnModel.class);
 
-    }
-
-    @SuppressWarnings("all")
-    private <D extends Dao<T, ?>, T> D getDao(Class<T> daoClass) {
-        return DaoManager.lookupDao(connectionSource, daoClass);
     }
 }
