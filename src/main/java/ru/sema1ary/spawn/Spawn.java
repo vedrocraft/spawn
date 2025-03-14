@@ -22,8 +22,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 public final class Spawn extends JavaPlugin implements BaseCommons {
 
-    private JdbcPooledConnectionSource connectionSource;
-
     @Override
     public void onEnable() {
         saveDefaultConfig();
@@ -33,7 +31,7 @@ public final class Spawn extends JavaPlugin implements BaseCommons {
         initConnectionSource();
 
         ServiceManager.registerService(SpawnService.class, new SpawnServiceImpl(
-                getDao(connectionSource, SpawnModel.class)));
+                getDao(SpawnModel.class)));
 
         getServer().getPluginManager().registerEvents(new JoinListener(ServiceManager.getService(SpawnService.class),
                 ServiceManager.getService(ConfigService.class)
@@ -55,7 +53,7 @@ public final class Spawn extends JavaPlugin implements BaseCommons {
 
     @Override
     public void onDisable() {
-        ConnectionSourceUtil.closeConnection(true, connectionSource);
+        ConnectionSourceUtil.closeConnection(true);
     }
 
     @SneakyThrows
@@ -65,7 +63,6 @@ public final class Spawn extends JavaPlugin implements BaseCommons {
             return;
         }
 
-        connectionSource = ConnectionSourceUtil.connectNoSQLDatabase(databaseFilePath.toString(), SpawnModel.class);
-
+        ConnectionSourceUtil.connectNoSQLDatabase(databaseFilePath.toString(), SpawnModel.class);
     }
 }
