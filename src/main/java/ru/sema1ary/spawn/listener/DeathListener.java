@@ -14,7 +14,7 @@ public class DeathListener implements Listener {
 
     @EventHandler
     public void onDeath(PlayerRespawnEvent event) {
-        if(configService.get("teleport-when-player-death")) {
+        if((boolean) configService.get("teleport-when-player-death")) {
             spawnService.teleportToSpawn(event.getPlayer());
         }
     }

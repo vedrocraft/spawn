@@ -17,17 +17,12 @@ public class JoinListener implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        if((boolean) configService.get("teleport-on-first-join")
-                && !player.hasPlayedBefore()) {
-            spawnService.teleportToSpawn(player);
-            return;
-        }
-
         if(configService.get("clear-inventory-on-join")) {
             player.getInventory().clear();
         }
 
-        if(configService.get("teleport-on-join")) {
+        if((boolean) configService.get("teleport-on-first-join") && !player.hasPlayedBefore()
+                || (boolean) configService.get("teleport-on-join")) {
             spawnService.teleportToSpawn(player);
         }
     }

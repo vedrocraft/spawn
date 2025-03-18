@@ -23,7 +23,7 @@ public class SpawnCommand {
     @Execute
     void execute(@Context Player sender) {
         spawnService.teleportToSpawn(sender);
-        PlayerUtil.sendMessage(sender, configService.get("spawn-command-message"));
+        PlayerUtil.sendMessage(sender, (String) configService.get("spawn-command-message"));
     }
 
     @Async
@@ -31,7 +31,7 @@ public class SpawnCommand {
     @Permission("spawn.other")
     void execute(@Context Player sender, @Arg("цель") Player target) {
         spawnService.teleportToSpawn(target);
-        PlayerUtil.sendMessage(sender, configService.get("spawn-command-other-sender"));
+        PlayerUtil.sendMessage(sender, (String) configService.get("spawn-command-other-sender"));
     }
 
     @Async
@@ -39,7 +39,7 @@ public class SpawnCommand {
     @Permission("spawn.reload")
     void reload (@Context CommandSender sender) {
         configService.reload();
-        PlayerUtil.sendMessage(sender, configService.get("reload-message"));
+        PlayerUtil.sendMessage(sender, (String) configService.get("reload-message"));
     }
 
     @Async
@@ -47,6 +47,6 @@ public class SpawnCommand {
     @Permission("spawn.set")
     void set(@Context Player sender) {
         spawnService.setSpawn(sender.getLocation());
-        PlayerUtil.sendMessage(sender, configService.get("spawn-set-message"));
+        PlayerUtil.sendMessage(sender, (String) configService.get("spawn-set-message"));
     }
 }
