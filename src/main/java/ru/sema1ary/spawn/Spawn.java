@@ -32,21 +32,25 @@ public final class Spawn extends JavaPlugin implements BaseCommons {
         ServiceManager.registerService(SpawnService.class, new SpawnServiceImpl(
                 getDao(SpawnModel.class)));
 
-        getServer().getPluginManager().registerEvents(new JoinListener(ServiceManager.getService(SpawnService.class),
-                ServiceManager.getService(ConfigService.class)
+        getServer().getPluginManager().registerEvents(new JoinListener(
+                getService(SpawnService.class),
+                getService(ConfigService.class)
         ), this);
 
-        getServer().getPluginManager().registerEvents(new DamageListener(ServiceManager.getService(SpawnService.class),
-                ServiceManager.getService(ConfigService.class)
+        getServer().getPluginManager().registerEvents(new DamageListener(
+                getService(SpawnService.class),
+                getService(ConfigService.class)
         ), this);
 
-        getServer().getPluginManager().registerEvents(new DeathListener(ServiceManager.getService(SpawnService.class),
-                ServiceManager.getService(ConfigService.class)
+        getServer().getPluginManager().registerEvents(new DeathListener(
+                getService(SpawnService.class),
+                getService(ConfigService.class)
         ), this);
 
         LiteCommandBuilder.builder()
-                .commands(new SpawnCommand(ServiceManager.getService(SpawnService.class),
-                        ServiceManager.getService(ConfigService.class)))
+                .commands(new SpawnCommand(
+                        getService(SpawnService.class),
+                        getService(ConfigService.class)))
                 .build();
     }
 
