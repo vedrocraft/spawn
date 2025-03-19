@@ -12,6 +12,7 @@ import ru.sema1ary.spawn.service.impl.SpawnServiceImpl;
 import ru.sema1ary.vedrocraftapi.BaseCommons;
 import ru.sema1ary.vedrocraftapi.command.LiteCommandBuilder;
 import ru.sema1ary.vedrocraftapi.ormlite.ConnectionSourceUtil;
+import ru.sema1ary.vedrocraftapi.ormlite.DatabaseUtil;
 import ru.sema1ary.vedrocraftapi.service.ConfigService;
 import ru.sema1ary.vedrocraftapi.service.ServiceManager;
 import ru.sema1ary.vedrocraftapi.service.impl.ConfigServiceImpl;
@@ -23,11 +24,9 @@ public final class Spawn extends JavaPlugin implements BaseCommons {
 
     @Override
     public void onEnable() {
-        saveDefaultConfig();
-
         ServiceManager.registerService(ConfigService.class, new ConfigServiceImpl(this));
 
-        initConnectionSource();
+        DatabaseUtil.initConnectionSource(this, SpawnModel.class);
 
         ServiceManager.registerService(SpawnService.class, new SpawnServiceImpl(
                 getDao(SpawnModel.class)));
@@ -57,15 +56,5 @@ public final class Spawn extends JavaPlugin implements BaseCommons {
     @Override
     public void onDisable() {
         ConnectionSourceUtil.closeConnection(true);
-    }
-
-    @SneakyThrows
-    private void initConnectionSource() {
-        Path databaseFilePath = Paths.get("plugins/spawn/database.sqlite");
-        if(!Files.exists(databaseFilePath) && !databaseFilePath.toFile().createNewFile()) {
-            return;
-        }
-
-        ConnectionSourceUtil.connectNoSQLDatabase(databaseFilePath.toString(), SpawnModel.class);
     }
 }
